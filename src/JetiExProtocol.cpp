@@ -176,7 +176,7 @@ uint8_t JetiExProtocol::GetJetiboxKey()
 uint8_t JetiExProtocol::DoJetiSend()
 {
   // send every 150 ms only
-  if( ( m_tiLastSend + 150 ) <= millis() )
+  if( ( m_tiLastSend + 100 ) <= millis() )
   {
     m_tiLastSend = millis(); 
 
@@ -223,8 +223,8 @@ void JetiExProtocol::SetSensorValueGPS( uint8_t id, bool bLongitude, float value
   } gps;
 
   // i.e.:
-  // E 11° 33' 22.176" --> 11.55616 --> 11° 33.369' see http://www.gpscoordinates.eu/convert-gps-coordinates.php
-  // N 48° 14' 44.520" --> 48.24570 --> 48° 14.742'
+  // E 11ï¿½ 33' 22.176" --> 11.55616 --> 11ï¿½ 33.369' see http://www.gpscoordinates.eu/convert-gps-coordinates.php
+  // N 48ï¿½ 14' 44.520" --> 48.24570 --> 48ï¿½ 14.742'
   float deg, frac = modff( value, &deg );
   uint16_t deg16 = (uint16_t)fabs( deg );
   uint16_t min16 = (uint16_t)fabs( frac * 0.6f * 100000 );

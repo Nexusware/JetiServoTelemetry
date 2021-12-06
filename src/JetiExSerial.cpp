@@ -280,8 +280,8 @@ ISR( USART_RX_vect )
     _pInstance->m_rxHeadPtr = _pInstance->IncBufPtr8( _pInstance->m_rxHeadPtr, _pInstance->m_rxBuf, _pInstance->RX_RINGBUF_SIZE );    // increase ringbuf pointer
   }
 
-  // if( status & FE0 ) // debug
-  //  digitalWrite( 13, HIGH ); 
+  //if( status & FE0 ) // debug
+  // digitalWrite( 13, HIGH ); 
 }
 
 #endif // CORE_TEENSY 

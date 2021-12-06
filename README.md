@@ -1,14 +1,19 @@
-/* 
-  Jeti Sensor EX Telemetry C++ Library
-  
-  DemoSensor - get some demeo values for telemetry display
-  --------------------------------------------------------------------
-  
-  Copyright (C) 2015 Bernd Wokoeck
-  
-  Version history:
-  1.00   11/22/2015  created
-  
+# JetiServoTelemetry
+
+Arduino microcontroller project for measuring a single connected RC Servo PWM (position in us, %), and update frequency (Hz) and sending via Jeti DUPLEX EX protocol to Jeti RX/TX as telemetry for display / logging.
+
+## References
+
+Forked from: [JetiExSensor](https://github.com/Sepp62/JetiExSensor). Copyright (C) 2017 by Bernd Wokoeck. Please see LICENSE (MIT).
+
+Using ideas from [Arduino PWM Decode](https://create.arduino.cc/projecthub/kelvineyeone/read-pwm-decode-rc-receiver-input-and-apply-fail-safe-6b90eb).
+
+## License
+
+Additional license for modifications / customisations in this repository (in addition to LICENSE).
+
+ Copyright (C) 2021 by Marc Marais
+
   Permission is hereby granted, free of charge, to any person obtaining
   a copy of this software and associated documentation files (the "Software"),
   to deal in the Software without restriction, including without limitation
@@ -27,57 +32,3 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 
-**************************************************************/
-
-#ifndef DEMOSENSOR_H
-#define DEMOSENSOR_H
-
-#if ARDUINO >= 100
- #include <Arduino.h>
-#else
- #include <WProgram.h>
-#endif
-
-class DemoSensor
-{
-public:
-  DemoSensor();
-
-  long GetVoltage();
-  long GetAltitude();
-  long GetTemp();
-  long GetClimb();
-  long GetFuel();
-  long GetRpm();
-
-  long GetVal( int idx ); // values 7..18
-
-protected:
-  enum
-  {
-    NVALS = 12,
-  };
-
-  float volt;
-  unsigned long tiVolt;
-
-  float alt;
-  unsigned long tiAlt;
-
-  float temp;
-  unsigned long tiTemp;
-
-  float climb;
-  unsigned long tiClimb;
-
-  float fuel;
-  unsigned long tiFuel;
-
-  float rpm;
-  unsigned long tiRpm;
-
-  float vals[NVALS];
-  unsigned long tiVals[NVALS];
-};
-
-#endif // DEMOSENSOR

@@ -19,10 +19,6 @@ ISR(PCINT2_vect)
   }
   else if (_pServoData->m_prev_pinState && !(PIND & _pServoData->m_pwmPIN_reg)) // HIGH to LOW (end of pulse) 
   {
-
-    
-    
-    
     digitalWrite( 13, LOW );
     
     _pServoData->m_prev_pinState = false;    
@@ -50,20 +46,19 @@ long ServoSensor::GetServoPositionPercent()
 
 long ServoSensor::GetServoFrequency() 
 {
-  if( m_servoData.m_Period == 0) return 0;
   int period = m_servoData.m_Period;
+  if( period == 0) return 0;
   return 1e6 / period;
 }
 
 void ServoSensor::SetPercentMin(int pcntMin)
 {
-  m_PWPcntMin = max(pcntMin, 500);
+  m_PWPcntMin = max(pcntMin, 0);
   EEPROM.put(m_address, pcntMin);
 }
 
 void ServoSensor::SetPercentMax(int pcntMax)
 {
-  m_PWPcntMax = min(pcntMax, 2500);
   EEPROM.put(m_address + sizeof(m_PWPcntMin), pcntMax);
 }
 

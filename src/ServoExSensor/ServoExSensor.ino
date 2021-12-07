@@ -105,10 +105,7 @@ void setup()
   // jetiEx.SetSensorActive( ID_VAL11, false, sensors ); // disable sensor
 
   jetiEx.SetDeviceId( 0x76, 0x32 ); // 0x3276
-  jetiEx.Start( "Servo", sensors, JetiExProtocol::SERIAL2 );
-
-  jetiEx.SetJetiboxText( JetiExProtocol::LINE1, "Servo Telemetry" );
-  jetiEx.SetJetiboxText( JetiExProtocol::LINE2, "" );
+  jetiEx.Start( "Throttle", sensors, JetiExProtocol::SERIAL2 );
 
   /* add your setup code here */
   servoSensor.Init();
@@ -116,8 +113,6 @@ void setup()
 
 void loop()
 {
-  /* add your main program code here */
-
   jetiEx.SetSensorValue( ID_SERVO,          servoSensor.GetServoPosition() );
   jetiEx.SetSensorValue( ID_SERVO_PERCENT,  servoSensor.GetServoPositionPercent() );
   jetiEx.SetSensorValue( ID_SERVO_FREQ,     servoSensor.GetServoFrequency() );
@@ -165,7 +160,7 @@ void HandleMenu()
 
   if ( _y == 0 )
   {
-    jetiEx.SetJetiboxText( JetiExProtocol::LINE1, "Servo" );
+    jetiEx.SetJetiboxText( JetiExProtocol::LINE1, "Throttle Servo" );
     jetiEx.SetJetiboxText( JetiExProtocol::LINE2, "Telemetry" );
   }
   else if ( _y == 1 )

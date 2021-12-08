@@ -9,19 +9,13 @@ ISR(PCINT2_vect)
 {
   unsigned long pciTime = micros();
 
-  if (!_pServoData->m_prev_pinState && (PIND & _pServoData->m_pwmPIN_reg))      // LOW to HIGH (start of pulse)
+  if( PIND & _pServoData->m_pwmPIN_reg )      // LOW to HIGH (start of pulse)
   {
-    digitalWrite( 13, HIGH );
-    
-    _pServoData->m_prev_pinState = true;
     _pServoData->m_Period = pciTime - _pServoData->m_pwmTimer;
     _pServoData->m_pwmTimer = pciTime;
   }
-  else if (_pServoData->m_prev_pinState && !(PIND & _pServoData->m_pwmPIN_reg)) // HIGH to LOW (end of pulse) 
+  else if( !(PIND & _pServoData->m_pwmPIN_reg) ) // HIGH to LOW (end of pulse) 
   {
-    digitalWrite( 13, LOW );
-    
-    _pServoData->m_prev_pinState = false;    
     _pServoData->m_PW = pciTime - _pServoData->m_pwmTimer;   
   }
 }
@@ -59,6 +53,7 @@ void ServoSensor::SetPercentMin(int pcntMin)
 
 void ServoSensor::SetPercentMax(int pcntMax)
 {
+  m_PWPcntMax = max(pcntMax, m_PWPcntMin);
   EEPROM.put(m_address + sizeof(m_PWPcntMin), pcntMax);
 }
 

@@ -16,7 +16,6 @@ public:
 
   volatile int m_PW = 0;                    // pulsewidth measurements
   volatile int m_Period = 0;                // Time between L->H (servo update frequency)
-  volatile boolean m_prev_pinState = false; // used to determine whether a pin has gone low-high or high-low
   volatile unsigned long m_pwmTimer = 0;    // store the start time of each PWM pulse
 };
 
